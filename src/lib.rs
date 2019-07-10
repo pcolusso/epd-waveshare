@@ -73,6 +73,9 @@ pub mod epd1in54;
 #[cfg(feature = "epd2in9")]
 pub mod epd2in9;
 
+#[cfg(feature = "epd2in13")]
+pub mod epd2in13;
+
 #[cfg(any(feature = "epd1in54", feature = "epd2in9"))]
 pub(crate) mod type_a;
 
