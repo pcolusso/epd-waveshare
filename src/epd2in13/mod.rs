@@ -6,14 +6,14 @@
 //!
 //! ```rust,ignore
 //! use epd_waveshare::{
-//!     epd2in9::{EPD2in9, Display2in9},
+//!     epd2in9::{EPD2in13, Display2in9},
 //!     graphics::{Display, DisplayRotation},
 //!     prelude::*,
 //! };
 //! use embedded_graphics::Drawing;
 //!
 //! // Setup EPD
-//! let mut epd = EPD2in9::new(&mut spi, cs_pin, busy_in, dc, rst, &mut delay).unwrap();
+//! let mut epd = EPD2in13::new(&mut spi, cs_pin, busy_in, dc, rst, &mut delay).unwrap();
 //!
 //! // Use display graphics
 //! let mut display = Display2in9::default();
@@ -61,7 +61,7 @@ mod graphics;
 #[cfg(feature = "graphics")]
 pub use crate::epd2in13::graphics::Display2in13;
 
-/// EPD2in9 driver
+/// EPD2in13 driver
 ///
 pub struct EPD2in13<SPI, CS, BUSY, DC, RST> {
     /// SPI
@@ -128,7 +128,7 @@ where
 }
 
 impl<SPI, CS, BUSY, DC, RST> WaveshareDisplay<SPI, CS, BUSY, DC, RST>
-    for EPD2in9<SPI, CS, BUSY, DC, RST>
+    for EPD2in13<SPI, CS, BUSY, DC, RST>
 where
     SPI: Write<u8>,
     CS: OutputPin,
@@ -272,7 +272,7 @@ where
     }
 }
 
-impl<SPI, CS, BUSY, DC, RST> EPD2in9<SPI, CS, BUSY, DC, RST>
+impl<SPI, CS, BUSY, DC, RST> EPD2in13<SPI, CS, BUSY, DC, RST>
 where
     SPI: Write<u8>,
     CS: OutputPin,
