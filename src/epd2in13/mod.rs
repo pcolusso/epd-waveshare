@@ -35,7 +35,7 @@
 //! epd.sleep(&mut spi).expect("sleep");
 //! ```
 
-pub const WIDTH: u32 = 128;
+pub const WIDTH: u32 = 122;
 pub const HEIGHT: u32 = 250;
 pub const DEFAULT_BACKGROUND_COLOR: Color = Color::White;
 const IS_BUSY_LOW: bool = false;
@@ -93,7 +93,7 @@ where
         // 0.. B[2:0]
         // Default Values: A = Height of Screen (0x127), B = 0x00 (GD, SM and TB=0?)
         self.interface
-            .cmd_with_data(spi, Command::DRIVER_OUTPUT_CONTROL, &[0x27, 0x01, 0x00])?;
+            .cmd_with_data(spi, Command::DRIVER_OUTPUT_CONTROL, &[0x7F, 0x01, 0x00])?;
 
         // 3 Databytes: (and default values from datasheet and arduino)
         // 1 .. A[6:0]  = 0xCF | 0xD7
@@ -117,6 +117,9 @@ where
         // One Databyte with default value 0x08 for 2us per line
         self.interface
             .cmd_with_data(spi, Command::SET_GATE_LINE_WIDTH, &[0x08])?;
+
+        self.interface
+            .cmd_with_data(spi, Command::BORDER_WAVEFORM_CONTROL, &[0x03])?;
 
         // One Databyte with default value 0x03
         //  -> address: x increment, y increment, address counter is updated in x direction
@@ -357,7 +360,7 @@ mod tests {
 
     #[test]
     fn epd_size() {
-        assert_eq!(WIDTH, 128);
+        assert_eq!(WIDTH, 122);
         assert_eq!(HEIGHT, 250);
         assert_eq!(DEFAULT_BACKGROUND_COLOR, Color::White);
     }
