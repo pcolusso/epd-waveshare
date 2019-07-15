@@ -89,11 +89,10 @@ where
 
         // 3 Databytes:
         // A[7:0]
-        // 0.. A[8]
-        // 0.. B[2:0]
+        // 0.. A[8]        // 0.. B[2:0]
         // Default Values: A = Height of Screen (0x127), B = 0x00 (GD, SM and TB=0?)
         self.interface
-            .cmd_with_data(spi, Command::DRIVER_OUTPUT_CONTROL, &[0x7F, 0x01, 0x00])?;
+            .cmd_with_data(spi, Command::DRIVER_OUTPUT_CONTROL, &[((HEIGHT - 1) & 0xFF) as u8, (((HEIGHT - 1) >> 8) & 0xFF) as u8, 0x00])?;
 
         // 3 Databytes: (and default values from datasheet and arduino)
         // 1 .. A[6:0]  = 0xCF | 0xD7

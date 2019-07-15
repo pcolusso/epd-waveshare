@@ -57,7 +57,7 @@ mod tests {
     #[test]
     fn graphics_size() {
         let display = Display2in13::default();
-        assert_eq!(display.buffer().len(), 4736);
+        assert_eq!(display.buffer().len(), 3812);
     }
 
     // test default background color on all bytes
