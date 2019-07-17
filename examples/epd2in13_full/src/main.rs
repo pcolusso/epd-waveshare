@@ -49,10 +49,10 @@ fn run() -> Result<(), std::io::Error> {
     busy.export().expect("busy export");
     while !busy.is_exported() {}
     busy.set_direction(Direction::In).expect("busy Direction");
-    busy.set_value(1).expect("busy Value set to 1");
+    //busy.set_value(1).expect("busy Value set to 1");
 
     // Configure Data/Command OutputPin
-    let dc = Pin::new(31); //pin 31 //bcm6 //TODO: Defined as 25 in python impl
+    let dc = Pin::new(25); //pin 31 //bcm6 //TODO: Defined as 25 in python impl
     dc.export().expect("dc export");
     while !dc.is_exported() {}
     dc.set_direction(Direction::Out).expect("dc Direction");
