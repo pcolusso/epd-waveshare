@@ -30,7 +30,7 @@ fn run() -> Result<(), std::io::Error> {
     let mut spi = Spidev::open("/dev/spidev0.0").expect("spidev directory");
     let options = SpidevOptions::new()
         .bits_per_word(8)
-        .max_speed_hz(4_000_000)
+        .max_speed_hz(2_000_000)
         .mode(spidev::SPI_MODE_0)
         .build();
     spi.configure(&options).expect("spi configuration");
@@ -49,7 +49,7 @@ fn run() -> Result<(), std::io::Error> {
     busy.export().expect("busy export");
     while !busy.is_exported() {}
     busy.set_direction(Direction::In).expect("busy Direction");
-    //busy.set_value(1).expect("busy Value set to 1");
+    busy.set_value(1).expect("busy Value set to 1");
 
     // Configure Data/Command OutputPin
     let dc = Pin::new(31); //pin 31 //bcm6 //TODO: Defined as 25 in python impl
