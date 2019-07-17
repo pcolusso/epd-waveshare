@@ -35,7 +35,7 @@
 //! epd.sleep(&mut spi).expect("sleep");
 //! ```
 
-pub const WIDTH: u32 = 122;
+pub const WIDTH: u32 = 128;
 pub const HEIGHT: u32 = 250;
 pub const DEFAULT_BACKGROUND_COLOR: Color = Color::White;
 const IS_BUSY_LOW: bool = false;
