@@ -30,13 +30,13 @@ fn run() -> Result<(), std::io::Error> {
     let mut spi = Spidev::open("/dev/spidev0.0").expect("spidev directory");
     let options = SpidevOptions::new()
         .bits_per_word(8)
-        .max_speed_hz(2_000_000)
+        .max_speed_hz(4_000_000)
         .mode(spidev::SPI_MODE_0)
         .build();
     spi.configure(&options).expect("spi configuration");
 
     // Configure Digital I/O Pin to be used as Chip Select for SPI
-    let cs_pin = Pin::new(8); //BCM7 CE0, TODO: defined as 8 in python impl
+    let cs_pin = Pin::new(8);
     cs_pin.export().expect("cs_pin export");
     while !cs_pin.is_exported() {}
     cs_pin
@@ -45,21 +45,21 @@ fn run() -> Result<(), std::io::Error> {
     cs_pin.set_value(1).expect("cs_pin Value set to 1");
 
     // Configure Busy Input Pin
-    let busy = Pin::new(24); //pin 29 //TODO: Defined as 24 in python impl
+    let busy = Pin::new(24);
     busy.export().expect("busy export");
     while !busy.is_exported() {}
     busy.set_direction(Direction::In).expect("busy Direction");
     //busy.set_value(1).expect("busy Value set to 1");
 
     // Configure Data/Command OutputPin
-    let dc = Pin::new(25); //pin 31 //bcm6 //TODO: Defined as 25 in python impl
+    let dc = Pin::new(25);
     dc.export().expect("dc export");
     while !dc.is_exported() {}
     dc.set_direction(Direction::Out).expect("dc Direction");
     dc.set_value(1).expect("dc Value set to 1");
 
     // Configure Reset OutputPin
-    let rst = Pin::new(17); //pin 36 //bcm16 //TODO: Defined as 17
+    let rst = Pin::new(17);
     rst.export().expect("rst export");
     while !rst.is_exported() {}
     rst.set_direction(Direction::Out).expect("rst Direction");

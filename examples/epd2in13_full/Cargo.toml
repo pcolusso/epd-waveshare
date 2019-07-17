@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 
-epd-waveshare = { path = "../../", default-features = false, features = ["epd2in9", "graphics"]}
+epd-waveshare = { path = "../../" }
 
 linux-embedded-hal = "0.2.2"
 embedded-graphics = "0.4.5"
